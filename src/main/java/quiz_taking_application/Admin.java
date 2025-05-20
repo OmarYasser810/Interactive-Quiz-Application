@@ -61,29 +61,8 @@ public class Admin extends User {
         }
     }
 
-    // List all students
-    public void listStudents() {
-        if (students.isEmpty()) {
-            System.out.println("No students found.");
-            return;
-        }
-        System.out.println("Students:");
-        for (Student s : students) {
-            s.displayInfo();
-            System.out.println();
-        }
+    public ArrayList<Student> getStudents() {
+        return students;
     }
 
-    // List all teachers
-    public void listTeachers() {
-        if (teachers.isEmpty()) {
-            System.out.println("No teachers found.");
-            return;
-        }
-        System.out.println("Teachers:");
-        for (Teacher t : teachers) {
-            t.displayInfo();
-            System.out.println();
-        }
-    }
 }
