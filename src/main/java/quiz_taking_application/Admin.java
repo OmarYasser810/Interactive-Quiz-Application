@@ -17,10 +17,17 @@ public class Admin extends User {
         return "admin";
     }
 
+    public ArrayList<Student> getStudents() {
+        return students;
+    }
+
+    public ArrayList<Teacher> getTeachers() {
+        return teachers;
+    }
+
     // Add a student
     public void addStudent(Student student) {
         students.add(student);
-        System.out.println("Student added: " + student.getUsername());
     }
 
     // Delete student by student ID WITHOUT removeIf
@@ -34,32 +41,19 @@ public class Admin extends User {
         return false; // Student not found
     }
 
-
     // Add a teacher
     public void addTeacher(Teacher teacher) {
         teachers.add(teacher);
-        System.out.println("Teacher added: " + teacher.getUsername());
     }
 
-    // Delete teacher by employee ID WITHOUT removeIf
-    public void deleteTeacher(String employeeId) {
-        boolean removed = false;
+    public boolean deleteTeacher(String employeeId) {
         for (int i = 0; i < teachers.size(); i++) {
             if (teachers.get(i).getEmployeeId().equals(employeeId)) {
                 teachers.remove(i);
-                removed = true;
-                break;
+                return true;
             }
         }
-        if (removed) {
-            System.out.println("Teacher with ID " + employeeId + " deleted successfully.");
-        } else {
-            System.out.println("Teacher with ID " + employeeId + " was not found.");
-        }
-    }
-
-    public ArrayList<Student> getStudents() {
-        return students;
+        return false;
     }
 
 }
