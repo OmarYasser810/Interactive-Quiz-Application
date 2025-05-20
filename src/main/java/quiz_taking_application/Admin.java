@@ -24,19 +24,16 @@ public class Admin extends User {
     }
 
     // Delete student by student ID WITHOUT removeIf
-    public void deleteStudent(String studentId) {
-        boolean removed = false;
+    public boolean deleteStudent(String studentId) {
         for (int i = 0; i < students.size(); i++) {
             if (students.get(i).getStudentId().equals(studentId)) {
                 students.remove(i);
-                removed = true;
-                break;
+                return true; // Student removed
             }
         }
-        System.out.println(removed
-            ? "Student with ID " + studentId + " deleted."
-            : "Student with ID " + studentId + " not found.");
+        return false; // Student not found
     }
+
 
     // Add a teacher
     public void addTeacher(Teacher teacher) {

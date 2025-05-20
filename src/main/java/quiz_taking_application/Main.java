@@ -2,6 +2,12 @@ package quiz_taking_application;
 
 public class Main {
     public static void main(String[] args) {
-        new LoginPage().setVisible(true);
+        
+        Admin admin = new Admin("admin1", "adminpass");
+        admin.addStudent(new Student("stud1", "studpass", 20, "S001", "CS"));
+        admin.addStudent(new Student("stud2", "studpass", 22, "S002", "Math"));
+        admin.addStudent(new Student("stud3", "studpass", 21, "S003", "Physics"));
+        admin.addTeacher(new Teacher("teach1", "teachpass", 35, "Math", "T001"));
+        new LoginPage(admin).setVisible(true);
     }
 }

@@ -32,7 +32,7 @@ public class AdminPage extends JFrame {
         // You can attach action listeners to these buttons here
         addStudentButton.addActionListener(e -> {openAddStudentDialog();});
         listStudentsButton.addActionListener(e -> showStudentList());
-
+        deleteStudentButton.addActionListener(e -> openDeleteStudentDialog());
 
         panel.add(welcomeLabel);
         panel.add(addStudentButton);
@@ -82,6 +82,22 @@ public class AdminPage extends JFrame {
             }
         }
     }
+
+    private void openDeleteStudentDialog() {
+        String studentId = JOptionPane.showInputDialog(this, "Enter Student ID to delete:");
+
+        if (studentId != null && !studentId.trim().isEmpty()) {
+            boolean removed = admin.deleteStudent(studentId.trim());
+
+            if (removed) {
+                JOptionPane.showMessageDialog(this, "Student with ID " + studentId + " deleted successfully.");
+            } else {
+                JOptionPane.showMessageDialog(this, "No student found with ID " + studentId + ".", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+
+
 
     private void showStudentList() {
         ArrayList<Student> students = admin.getStudents(); // You need to expose this list via getter

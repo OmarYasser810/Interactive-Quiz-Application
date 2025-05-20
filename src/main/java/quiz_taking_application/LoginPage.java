@@ -9,19 +9,21 @@ public class LoginPage extends JFrame {
     private JTextField usernameField;
     private JPasswordField passwordField;
     private JButton loginButton;
+    private Admin admin;
 
     // Simulated users (can be loaded from a database or list)
     private ArrayList<User> users;
 
-    public LoginPage() {
+    public LoginPage(Admin admin) {
+        this.admin = admin;
+        
         setTitle("Login Page");
         setSize(400, 250);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null); // center the window
 
         users = new ArrayList<>();
-        loadSampleUsers();
-
+        users.add(admin); // Add admin to the list
         initUI();
     }
 
@@ -49,12 +51,6 @@ public class LoginPage extends JFrame {
         loginButton.addActionListener(e -> authenticate());
     }
 
-    private void loadSampleUsers() {
-        users.add(new Admin("admin1", "adminpass"));
-        users.add(new Teacher("teach1", "teachpass", 35, "Math", "T001"));
-        users.add(new Student("stud1", "studpass", 20, "S001", "CS"));
-    }
-
     private void authenticate() {
         String username = usernameField.getText().trim();
         String password = new String(passwordField.getPassword()).trim();
@@ -69,8 +65,7 @@ public class LoginPage extends JFrame {
 
                 // Redirect to role-based panel
                 if (user instanceof Admin) {
-                    Admin adminUser = (Admin) user;
-                    new AdminPage(adminUser).setVisible(true);
+                    new AdminPage(admin).setVisible(true);
                 }
 
                 // You can add similar blocks for TeacherPanel or StudentPanel
@@ -85,8 +80,4 @@ public class LoginPage extends JFrame {
                 JOptionPane.ERROR_MESSAGE);
     }
 
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new LoginPage().setVisible(true));
-    }
 }
