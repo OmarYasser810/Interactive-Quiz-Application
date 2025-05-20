@@ -24,6 +24,8 @@ public class LoginPage extends JFrame {
 
         users = new ArrayList<>();
         users.add(admin); // Add admin to the list
+        users.addAll(admin.getStudents()); // Add students to the list
+        users.addAll(admin.getTeachers()); // Add teachers to the list
         initUI();
     }
 
@@ -67,8 +69,9 @@ public class LoginPage extends JFrame {
                 if (user instanceof Admin) {
                     new AdminPage(admin).setVisible(true);
                 }
-
-                // You can add similar blocks for TeacherPanel or StudentPanel
+                if (user instanceof Teacher) {
+                    new TeacherPage((Teacher) user).setVisible(true);
+                }
 
                 return;
             }

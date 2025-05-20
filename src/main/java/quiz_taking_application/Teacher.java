@@ -1,9 +1,12 @@
 package quiz_taking_application;
 
+import java.util.ArrayList;
+
 public class Teacher extends User {
     private int age;
     private String subject;
     private String employeeId;
+    private ArrayList<Quiz> quizzes = new ArrayList<>();
 
     public Teacher(String username, String password, int age, String subject, String employeeId) {
         super(username, password); // call User constructor
@@ -30,11 +33,12 @@ public class Teacher extends User {
         return "teacher";
     }
 
-    public void displayInfo() {
-        System.out.println("=== Teacher Info ===");
-        System.out.println("Username: " + username);
-        System.out.println("Employee ID: " + employeeId);
-        System.out.println("Age: " + age);
-        System.out.println("Subject: " + subject);
+    public void addQuiz(Quiz quiz) {
+        quizzes.add(quiz);
     }
+
+    public ArrayList<Quiz> getQuizzes() {
+        return quizzes;
+    }
+
 }

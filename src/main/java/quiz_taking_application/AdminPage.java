@@ -31,6 +31,7 @@ public class AdminPage extends JFrame {
         JButton addTeacherButton = new JButton("Add Teacher");
         JButton deleteTeacherButton = new JButton("Delete Teacher");
         JButton listTeachersButton = new JButton("List Teachers");
+        JButton logoutButton = new JButton("Logout");
 
         // Attach action listeners
         addStudentButton.addActionListener(e -> openAddStudentDialog());
@@ -39,6 +40,7 @@ public class AdminPage extends JFrame {
         addTeacherButton.addActionListener(e -> openAddTeacherDialog());
         deleteTeacherButton.addActionListener(e -> openDeleteTeacherDialog());
         listTeachersButton.addActionListener(e -> showTeacherList());
+        logoutButton.addActionListener(e -> dispose()); // Close the window
 
         // Add components in order
         panel.add(welcomeLabel);
@@ -48,6 +50,7 @@ public class AdminPage extends JFrame {
         panel.add(addTeacherButton);
         panel.add(deleteTeacherButton);
         panel.add(listTeachersButton);
+        panel.add(logoutButton);
 
         add(panel);
     }
