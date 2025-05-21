@@ -1,4 +1,4 @@
-package quiz_taking_application;
+package quiz_taking_application.Users;
 
 public abstract class User {
     protected String username;

@@ -1,6 +1,8 @@
-package quiz_taking_application;
+package quiz_taking_application.Users;
 
 import java.util.ArrayList;
+
+import quiz_taking_application.Quizzes.Quiz;
 
 public class Teacher extends User {
     private int age;

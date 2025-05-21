@@ -1,6 +1,12 @@
-package quiz_taking_application;
+package quiz_taking_application.GUIs;
 
 import javax.swing.*;
+
+import quiz_taking_application.Users.Admin;
+import quiz_taking_application.Users.Student;
+import quiz_taking_application.Users.Teacher;
+import quiz_taking_application.Users.User;
+
 import java.awt.*;
 import java.util.ArrayList;
 

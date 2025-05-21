@@ -1,5 +1,10 @@
 package quiz_taking_application;
 
+import quiz_taking_application.GUIs.LoginPage;
+import quiz_taking_application.Users.Admin;
+import quiz_taking_application.Users.Student;
+import quiz_taking_application.Users.Teacher;
+
 public class Main {
     public static void main(String[] args) {
         

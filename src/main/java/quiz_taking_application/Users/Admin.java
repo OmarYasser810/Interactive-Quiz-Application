@@ -1,6 +1,8 @@
-package quiz_taking_application;
+package quiz_taking_application.Users;
 
 import java.util.ArrayList;
+
+import quiz_taking_application.Quizzes.QuizResult;
 
 public class Admin extends User {
     private ArrayList<Student> students;

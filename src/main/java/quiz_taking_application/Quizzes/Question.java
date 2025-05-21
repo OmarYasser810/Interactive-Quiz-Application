@@ -1,4 +1,4 @@
-package quiz_taking_application;
+package quiz_taking_application.Quizzes;
 
 import java.util.ArrayList;
 
