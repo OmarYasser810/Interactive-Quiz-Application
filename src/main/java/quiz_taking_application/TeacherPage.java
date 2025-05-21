@@ -7,9 +7,11 @@ import java.util.ArrayList;
 public class TeacherPage extends JFrame {
 
     private Teacher teacher;
+    private Admin admin;
 
-    public TeacherPage(Teacher teacher) {
+    public TeacherPage(Teacher teacher, Admin admin) {
         this.teacher = teacher;
+        this.admin = admin;
         setTitle("Teacher Dashboard - " + teacher.getUsername());
         setSize(400, 300);
         setLocationRelativeTo(null);
@@ -19,22 +21,25 @@ public class TeacherPage extends JFrame {
     }
 
     private void initUI() {
-        JPanel panel = new JPanel(new GridLayout(4, 1, 10, 10));
+        JPanel panel = new JPanel(new GridLayout(5, 1, 10, 10));
         panel.setBorder(BorderFactory.createEmptyBorder(20, 30, 20, 30));
 
         JLabel welcomeLabel = new JLabel("Welcome Teacher: " + teacher.getUsername(), SwingConstants.CENTER);
 
         JButton createQuizButton = new JButton("Create Quiz");
         JButton viewQuizzesButton = new JButton("View My Quizzes");
+        JButton viewResultsButton = new JButton("View Quiz Results");
         JButton logoutButton = new JButton("Logout");
 
         createQuizButton.addActionListener(e -> openCreateQuizDialog());
         viewQuizzesButton.addActionListener(e -> showMyQuizzes());
+        viewResultsButton.addActionListener(e -> showStudentResults());
         logoutButton.addActionListener(e -> dispose()); // Close the window
 
         panel.add(welcomeLabel);
         panel.add(createQuizButton);
         panel.add(viewQuizzesButton);
+        panel.add(viewResultsButton);
         panel.add(logoutButton);
 
         add(panel);
@@ -156,5 +161,45 @@ public class TeacherPage extends JFrame {
 
         JOptionPane.showMessageDialog(this, scrollPane, "My Quizzes", JOptionPane.INFORMATION_MESSAGE);
     }
+
+    private void showStudentResults() {
+        ArrayList<QuizResult> results = admin.getResultsForTeacher(teacher);
+
+        if (results.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No students have taken your quizzes yet.", "Quiz Results", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("Student Results for Your Quizzes:\n\n");
+
+        // Group by quiz title
+        for (Quiz quiz : teacher.getQuizzes()) {
+            sb.append("Quiz: ").append(quiz.getTitle()).append("\n");
+
+            boolean hasResults = false;
+            for (QuizResult result : results) {
+                if (result.getQuiz().equals(quiz)) {
+                    sb.append("  Student: ").append(result.getStudent().getUsername())
+                    .append(" | Score: ").append(result.getTotalScore()).append("\n");
+                    hasResults = true;
+                }
+            }
+
+            if (!hasResults) {
+                sb.append("  No students have taken this quiz yet.\n");
+            }
+
+            sb.append("--------------------------------------------------\n");
+        }
+
+        JTextArea textArea = new JTextArea(sb.toString());
+        textArea.setEditable(false);
+        JScrollPane scrollPane = new JScrollPane(textArea);
+        scrollPane.setPreferredSize(new Dimension(500, 400));
+
+        JOptionPane.showMessageDialog(this, scrollPane, "Student Quiz Results", JOptionPane.INFORMATION_MESSAGE);
+    }
+
 
 }

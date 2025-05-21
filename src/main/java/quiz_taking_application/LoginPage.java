@@ -69,8 +69,11 @@ public class LoginPage extends JFrame {
                 if (user instanceof Admin) {
                     new AdminPage(admin).setVisible(true);
                 }
-                if (user instanceof Teacher) {
-                    new TeacherPage((Teacher) user).setVisible(true);
+                else if (user instanceof Teacher) {
+                    new TeacherPage((Teacher) user, admin).setVisible(true);
+                }
+                else if (user instanceof Student) {
+                    new StudentPage((Student) user, admin).setVisible(true);
                 }
 
                 return;
